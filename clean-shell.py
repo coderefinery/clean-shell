@@ -63,6 +63,11 @@ GID = os.getgid()
 tmpdir = tempfile.TemporaryDirectory(prefix='clean-shell-')
 tmp_path = Path(tmpdir.name)
 
+# Check if it is allowed for normal users:
+unpriv_path = Path('/proc/sys/kernel/unprivileged_userns_clone')
+if unpriv_path.exists() and unpriv_path.read_text()[0] == '0':
+    print("Must enable user namespace clone: sudo su -c 'echo 1 > /proc/sys/kernel/unprivileged_userns_clone'")
+    exit(1)
 
 #print('phase 1')
 unshare.unshare(unshare.CLONE_NEWNS
