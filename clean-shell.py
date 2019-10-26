@@ -109,7 +109,8 @@ for dest in FILES:
     # Mount will fail it if doesn't exist, if we touch it first then it
     # will persist after we are done.  Better solution to this later?
     if not dest.exists():
-        print("Ignoring non-existing file %s"%str(dest))
+        if args.verbose:
+            print("Ignoring non-existing file %s"%str(dest))
         continue
     if args.verbose:
         print("%s --> %s"%(str(src), str(dest)))
