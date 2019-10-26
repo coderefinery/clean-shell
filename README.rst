@@ -28,6 +28,10 @@ Requires Python>=3.4.
 Dependencies: ``unshare`` (``pip install --user unshare``).  This is a
 thin wrapper around the ``unshare`` Linux system call.
 
+Unprivileged users need to be able to use namespaces.  You can make
+this so with ``sudo su -c 'echo 1 >
+/proc/sys/kernel/unprivileged_userns_clone'``
+
 
 
 Invocation
