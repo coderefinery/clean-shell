@@ -27,17 +27,6 @@ FILES = {
     '~/.gitignore',
     '~/.ssh/',
     }
-# Add any extra files/directories from ~/.clean-shell to the list of
-# stuff to be replaced.
-for p in Path('~/.clean-shell/').expanduser().iterdir():
-    name = p.name
-    if name.endswith('~') or name.endswith('#'):
-        continue
-    name = '~/' + name
-    if p.is_dir():
-        name = name + '/'
-    FILES.add(name)
-
 
 def copy(src, dest):
     """Copy either file or directory
@@ -54,6 +43,19 @@ def copy(src, dest):
 cs_path = Path(os.path.dirname(__file__))
 default_path = cs_path / 'defaults'
 local_path = Path('~/.clean-shell').expanduser()
+
+# Add any extra files/directories from ~/.clean-shell to the list of
+# stuff to be replaced.
+if local_path.exists():
+    for p in local_path.iterdir():
+        name = p.name
+        if name.endswith('~') or name.endswith('#'):
+            continue
+        name = '~/' + name
+        if p.is_dir():
+            name = name + '/'
+        FILES.add(name)
+
 
 UID = os.getuid()
 GID = os.getgid()
