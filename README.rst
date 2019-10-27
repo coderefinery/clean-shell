@@ -29,8 +29,11 @@ Dependencies: ``unshare`` (``pip install --user unshare``).  This is a
 thin wrapper around the ``unshare`` Linux system call.
 
 Unprivileged users need to be able to use namespaces.  You can make
-this so with ``sudo su -c 'echo 1 >
-/proc/sys/kernel/unprivileged_userns_clone'``
+this so with ``sudo bash -c 'echo 1 >
+/proc/sys/kernel/unprivileged_userns_clone'``.  I'm currently unclear
+if this is only disabled in Debian-like Linuxes, or if this is always
+disabled by default for normal users.  If it is disabled by default,
+this really is much less useful.  Expert advice would be welcome here.
 
 
 
